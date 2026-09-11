@@ -1,13 +1,12 @@
 document.getElementById("studentForm").addEventListener("submit", addStudent);
 
 function addStudent(event) {
-
     event.preventDefault();
 
     let student = {
         name: document.getElementById("name").value,
-        rollNumber: document.getElementById("rollNumber").value,
-        className: document.getElementById("className").value,
+        roll_number: document.getElementById("rollNumber").value,
+        class_name: document.getElementById("className").value,
         tamil: document.getElementById("tamil").value,
         english: document.getElementById("english").value,
         social: document.getElementById("social").value,
@@ -15,19 +14,24 @@ function addStudent(event) {
         science: document.getElementById("science").value
     };
 
-    fetch("http://localhost:8080/students", {
+    fetch("http://127.0.0.1:8000/students", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(student)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert("Student Added!");
+        document.getElementById("studentForm").reset();
     });
-
-    alert("Student Added!");
 }
+
+
 function getStudents() {
 
-    fetch("http://localhost:8080/students")
+    fetch("http://127.0.0.1:8000/students")
         .then(response => response.json())
         .then(students => {
 
@@ -41,8 +45,8 @@ function getStudents() {
                     <tr>
                         <td>${student.id}</td>
                         <td>${student.name}</td>
-                        <td>${student.rollNumber}</td>
-                        <td>${student.className}</td>
+                        <td>${student.roll_number}</td>
+                        <td>${student.class_name}</td>
                         <td>${student.tamil}</td>
                         <td>${student.english}</td>
                         <td>${student.social}</td>
@@ -58,11 +62,13 @@ function getStudents() {
             });
         });
 }
+
+
 function searchStudent() {
 
     let rollNumber = document.getElementById("rollNumber").value;
 
-    fetch("http://localhost:8080/students/roll/" + rollNumber)
+    fetch("http://127.0.0.1:8000/students/roll/" + rollNumber)
         .then(response => response.json())
         .then(student => {
 
@@ -72,8 +78,8 @@ function searchStudent() {
                 <tr>
                     <td>${student.id}</td>
                     <td>${student.name}</td>
-                    <td>${student.rollNumber}</td>
-                    <td>${student.className}</td>
+                    <td>${student.roll_number}</td>
+                    <td>${student.class_name}</td>
                     <td>${student.tamil}</td>
                     <td>${student.english}</td>
                     <td>${student.social}</td>
@@ -88,9 +94,11 @@ function searchStudent() {
             `;
         });
 }
+
+
 function deleteStudent(id) {
 
-    fetch("http://localhost:8080/students/" + id, {
+    fetch("http://127.0.0.1:8000/students/" + id, {
         method: "DELETE"
     })
     .then(() => {
@@ -98,3 +106,4 @@ function deleteStudent(id) {
         getStudents();
     });
 }
+
