@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student List</title>
+</head>
+
+<body onload="getStudents()">
+
+<h1>Student List</h1>
+<link rel="stylesheet" href="index.css">
+
+<a href="index.html">Add Student</a>
+
+<br><br>
+
+<label>Search by Roll Number:</label>
+<input type="text" id="rollNumber">
+
+<button onclick="searchStudent()">Search</button>
+<button onclick="getStudents()">Show All</button>
+
+<br><br>
+
+<table border="1">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Class</th>
+            <th>Tamil</th>
+            <th>English</th>
+            <th>Social</th>
+            <th>Maths</th>
+            <th>Science</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody id="studentList">
+    </tbody>
+
+</table>
+
+<script src="index.js"></script>
+
+</body>
+</html>
